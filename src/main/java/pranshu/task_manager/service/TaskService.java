@@ -1,10 +1,13 @@
 package pranshu.task_manager.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import pranshu.task_manager.dto.TaskRequest;
+import pranshu.task_manager.dto.TaskResponse;
 import pranshu.task_manager.modal.Task;
 import pranshu.task_manager.repository.TaskRepository;
 
@@ -14,23 +17,27 @@ public class TaskService {
 	@Autowired
 	TaskRepository taskRepository;
 
-	public void createTask(Task task){
+	//crate all task
+	public void createTask(TaskRequest taskRequest){
 		
-		taskRepository.save(task);
+		taskRepository.save(mapToRequest(taskRequest));
 	}
 	
-	public List<Task> getAllTask() {
+	//get all task from db
+	public List<TaskResponse> getAllTask() {
 		
-		return taskRepository.findAll();
+		return convertAllTaskToTaskResponse(taskRepository.findAll());
 	}
 
-	public Task getTaskById(Long id) {
+	public TaskResponse getTaskById(Long id) {
 		
-		return taskRepository.findById(id).orElseThrow();
+		return mapToResponse(taskRepository.findById(id).orElseThrow());
 	}
 
-	public void updateTask(Task task) {
+	public void updateTask(Long id, TaskRequest taskRequest) {
 	
+		Task task = mapToRequest(taskRequest);
+		task.setId(id);
 		taskRepository.save(task);
 	}
 
@@ -42,5 +49,40 @@ public class TaskService {
 	public void deleteAllTask() {
 		
 		taskRepository.deleteAll();
+	}
+	
+	// define DTO & uses basically its stand for data transfer object.
+	
+	private TaskResponse mapToResponse(Task task) {
+		
+		TaskResponse taskRes = new TaskResponse();
+		
+		taskRes.setId(task.getId());
+		taskRes.setTitle(task.getTitle());
+		taskRes.setDiscription(task.getDescription());
+		taskRes.setStatus(task.getStatus());
+		taskRes.setCreatedAt(task.getCreatedAt());
+		
+		return taskRes;
+	}
+	
+	private Task mapToRequest(TaskRequest taskReq) {
+		
+		Task task = new Task();
+		task.setTitle(taskReq.getTitle());
+		task.setDescription(taskReq.getDiscription());
+		task.setStatus(taskReq.getStatus());
+		return task;
+	}
+	
+	private List<TaskResponse> convertAllTaskToTaskResponse(List<Task> task){
+		
+		ArrayList<TaskResponse> list = new ArrayList<>();
+		
+		for(Task t : task) {
+			
+			list.add(mapToResponse(t));
+		}
+		return list;
 	}
 }

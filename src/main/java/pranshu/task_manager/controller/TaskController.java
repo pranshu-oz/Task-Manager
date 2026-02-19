@@ -3,8 +3,6 @@ package pranshu.task_manager.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,8 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import pranshu.task_manager.modal.Task;
+import pranshu.task_manager.dto.TaskRequest;
+import pranshu.task_manager.dto.TaskResponse;
 import pranshu.task_manager.service.TaskService;
 
 @RestController
@@ -25,17 +23,16 @@ public class TaskController {
 	//add new Task
 
 	@PostMapping("/add")
-	public String createTask(@RequestBody Task task) {
+	public String createTask(@RequestBody TaskRequest taskRequest) {
 
-		taskService.createTask(task);
-		System.out.println(task.toString());
-		return "Saved";
+		taskService.createTask(taskRequest);
+		return "Saved all Task";
 	}
 	
 	// view all Task
 	
 	@GetMapping("/show")
-	public List<Task> viewTask() {
+	public List<TaskResponse> viewTask() {
 		System.out.println("got in get mapping");
 		return taskService.getAllTask();
 	}
@@ -43,15 +40,15 @@ public class TaskController {
 	// view task by Id
 	
 	@GetMapping("/show/{id}")
-	public Task viewTaskById(@PathVariable Long id) {
+	public TaskResponse viewTaskById(@PathVariable Long id) {
 		return taskService.getTaskById(id);
 	}
 	
 	// update task by Id
 	
-	@PutMapping("/update")
-	public String updateTask(@RequestBody Task task) {
-		taskService.updateTask(task);
+	@PutMapping("/update/{id}")
+	public String updateTask(@PathVariable Long id, @RequestBody TaskRequest taskRequest) {
+		taskService.updateTask(id, taskRequest);
 		return "Task Updated";
 	}
 	
