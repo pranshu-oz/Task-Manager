@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import pranshu.task_manager.dto.TaskRequest;
 import pranshu.task_manager.dto.TaskResponse;
-import pranshu.task_manager.modal.Task;
+import pranshu.task_manager.model.Task;
 import pranshu.task_manager.repository.TaskRepository;
 
 @Service

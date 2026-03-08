@@ -1,4 +1,4 @@
-package pranshu.task_manager.modal;
+package pranshu.task_manager.model;
 
 import java.util.Date;
 

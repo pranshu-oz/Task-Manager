@@ -22,7 +22,7 @@ public class TaskController {
 	
 	//add new Task
 
-	@PostMapping("/add")
+	@PostMapping("/task")
 	public String createTask(@RequestBody TaskRequest taskRequest) {
 
 		taskService.createTask(taskRequest);
@@ -31,7 +31,7 @@ public class TaskController {
 	
 	// view all Task
 	
-	@GetMapping("/show")
+	@GetMapping("/task")
 	public List<TaskResponse> viewTask() {
 		System.out.println("got in get mapping");
 		return taskService.getAllTask();
@@ -39,14 +39,14 @@ public class TaskController {
 	
 	// view task by Id
 	
-	@GetMapping("/show/{id}")
+	@GetMapping("/task/{id}")
 	public TaskResponse viewTaskById(@PathVariable Long id) {
 		return taskService.getTaskById(id);
 	}
 	
 	// update task by Id
 	
-	@PutMapping("/update/{id}")
+	@PutMapping("/task/{id}")
 	public String updateTask(@PathVariable Long id, @RequestBody TaskRequest taskRequest) {
 		taskService.updateTask(id, taskRequest);
 		return "Task Updated";
@@ -54,7 +54,7 @@ public class TaskController {
 	
 	// delete task by Id
 	
-	@DeleteMapping("/delete/{id}")
+	@DeleteMapping("/task/{id}")
 	public String deleteTaskById(@PathVariable Long id) {
 		
 		taskService.deleteTaskById(id);
@@ -63,7 +63,7 @@ public class TaskController {
 	
 	// delete all task
 	
-	@DeleteMapping("/deleteAll")
+	@DeleteMapping("/task")
 	public String deleteAllTask() {
 		
 		taskService.deleteAllTask();
