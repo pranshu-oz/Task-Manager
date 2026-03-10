@@ -1,13 +1,10 @@
 package pranshu.task_manager.model;
 
 import java.util.Date;
-
-import jakarta.annotation.Generated;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity

@@ -1,18 +1,15 @@
 package pranshu.task_manager.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import pranshu.task_manager.dto.TaskUserRequest;
 import pranshu.task_manager.dto.TaskUserResponse;
-import pranshu.task_manager.model.TaskUser;
 import pranshu.task_manager.service.JwtService;
 import pranshu.task_manager.service.TaskUserService;
 
