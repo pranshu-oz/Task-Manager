@@ -10,11 +10,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import pranshu.task_manager.dto.TaskRequest;
 import pranshu.task_manager.dto.TaskResponse;
 import pranshu.task_manager.service.TaskService;
 
 @RestController
+@SecurityRequirement(name="BearerAuth")
 public class TaskController {
 	
 	@Autowired

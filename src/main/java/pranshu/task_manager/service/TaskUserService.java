@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import pranshu.task_manager.dto.TaskUserResponse;
 import pranshu.task_manager.model.TaskUser;
 import pranshu.task_manager.repository.TaskUserRepository;
 
@@ -30,11 +31,22 @@ public class TaskUserService implements UserDetailsService {
 				.build();
 	}
 
-	public void addNewUser(TaskUser user) {
+	public void addNewUser(TaskUserResponse response) {
+		
+		TaskUser user = mapToTaskUserResponse(response);
 		
 		user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
 		userRepository.save(user);
 		
+	}
+	
+	private TaskUser mapToTaskUserResponse(TaskUserResponse user) {
+		
+		TaskUser taskUser = new TaskUser();
+		taskUser.setPassword(user.getPassword());
+		taskUser.setUsername(user.getUsername());
+		taskUser.setRoles(user.getRoles());
+		return taskUser;
 	}
 	
 }

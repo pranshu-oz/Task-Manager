@@ -31,6 +31,9 @@ public class TaskManagerSecurity {
 			.authorizeHttpRequests(auth -> auth
 					.requestMatchers("/user").permitAll()
 					.requestMatchers("/login").permitAll()
+					.requestMatchers("/swagger-ui.html",
+									"/swagger-ui/**",
+									"/v3/api-docs/**").permitAll()
 					.requestMatchers(HttpMethod.DELETE).hasRole("ADMIN")
 					.requestMatchers(HttpMethod.POST).hasRole("MANAGER")
 					.requestMatchers(HttpMethod.POST).hasRole("MANAGER")

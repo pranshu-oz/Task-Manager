@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import pranshu.task_manager.dto.TaskUserRequest;
+import pranshu.task_manager.dto.TaskUserResponse;
 import pranshu.task_manager.model.TaskUser;
 import pranshu.task_manager.service.JwtService;
 import pranshu.task_manager.service.TaskUserService;
@@ -27,7 +29,7 @@ public class LoginController {
 	AuthenticationManager authenticationManager;
 	
 	@PostMapping("/login")
-	public String validateLogin(@RequestBody TaskUser user) {
+	public String validateLogin(@RequestBody TaskUserRequest user) {
 		
 		Authentication auth = 
 				authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
@@ -39,7 +41,7 @@ public class LoginController {
 	}
 	
 	@PostMapping("/user")
-	public String addUser(@RequestBody TaskUser user) {
+	public String addUser(@RequestBody TaskUserResponse user) {
 		
 		userService.addNewUser(user);
 		
