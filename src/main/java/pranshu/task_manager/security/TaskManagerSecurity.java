@@ -28,7 +28,7 @@ public class TaskManagerSecurity {
 		http
 			.csrf(csrf -> csrf.disable())
 			.authorizeHttpRequests(auth -> auth
-					.requestMatchers("/user").permitAll()
+					.requestMatchers(HttpMethod.POST,"/user").permitAll()
 					.requestMatchers("/login").permitAll()
 					.requestMatchers("/swagger-ui.html",
 									"/swagger-ui/**",
@@ -36,6 +36,8 @@ public class TaskManagerSecurity {
 					.requestMatchers(HttpMethod.DELETE).hasRole("ADMIN")
 					.requestMatchers(HttpMethod.POST).hasRole("MANAGER")
 					.requestMatchers(HttpMethod.POST).hasRole("MANAGER")
+					.requestMatchers(HttpMethod.GET).hasAnyRole("ADMIN","MANAGER")
+					.requestMatchers("/task/my").hasRole("EMPLOYEE")
 					.anyRequest().authenticated())
 			.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 			

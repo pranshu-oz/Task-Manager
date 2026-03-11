@@ -20,7 +20,15 @@ public class TaskUser {
 	
 	private String password;
 	
-	private String roles;
+	private Role roles;
+
+	public Role getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Role roles) {
+		this.roles = roles;
+	}
 
 	public Long getId() {
 		return id;
@@ -46,13 +54,7 @@ public class TaskUser {
 		this.password = password;
 	}
 
-	public String getRoles() {
-		return roles;
-	}
 
-	public void setRoles(String roles) {
-		this.roles = roles;
-	}
 	
 	
 }

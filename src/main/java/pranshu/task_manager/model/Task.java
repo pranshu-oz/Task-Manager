@@ -3,6 +3,8 @@ package pranshu.task_manager.model;
 import java.util.Date;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import org.hibernate.annotations.CreationTimestamp;
@@ -23,6 +25,10 @@ public class Task {
 	@CreationTimestamp
 	private Date createdAt;
 	
+	@ManyToOne
+	@JoinColumn(name="assigned_to")
+	private  TaskUser assignedTo;
+	
 	public Task() {
 		
 	}
@@ -38,6 +44,14 @@ public class Task {
 
 	
 	
+	public TaskUser getAssignedTo() {
+		return assignedTo;
+	}
+
+	public void setAssignedTo(TaskUser assignedTo) {
+		this.assignedTo = assignedTo;
+	}
+
 	public Long getId() {
 		return id;
 	}

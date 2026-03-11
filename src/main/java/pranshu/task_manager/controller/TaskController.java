@@ -36,7 +36,7 @@ public class TaskController {
 	
 	@GetMapping("/task")
 	public List<TaskResponse> viewTask() {
-		System.out.println("got in get mapping");
+	
 		return taskService.getAllTask();
 	}
 	
@@ -71,5 +71,12 @@ public class TaskController {
 		
 		taskService.deleteAllTask();
 		return "All task has been deleted";
+	}
+	
+	//Employee only
+	@GetMapping("/task/my")
+	public List<TaskResponse> getMyTask() {
+		
+		return taskService.getMyTask();
 	}
 }
